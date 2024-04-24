@@ -40,13 +40,12 @@ const Home = () => {
       <div className="absolute size-96 bg-neutral-700 top-0 rounded-full blur-[150px] -z-50" />
       <div className="my-44 sm:my-52 flex flex-col gap-14 items-center justify-center text-center">
         <h1 className="text-5xl md:w-[75%] md:text-6xl xl:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50 leading-tight px-4 md:px-0">
-          Start Sharing Your Voice Today!
+        Publish your passions, your way
         </h1>
         <p className="w-11/12 md:w-[55%] sm:text-xl text-slate-400">
-          Ignite your passion for writing and share your voice with the world
-          through our{" "}
-          <span className="text-slate-100">intuitive blogging platform.</span>{" "}
-          Unleash your creativity and join a community of fellow bloggers today.
+        Create a unique and beautiful blog easily{" "}
+          <span className="text-slate-100"> </span>{" "}
+
         </p>
         <div className="w-4/5 md:w-[40%] relative">
           <Input

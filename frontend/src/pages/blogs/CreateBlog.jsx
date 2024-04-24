@@ -57,8 +57,8 @@ const CreateBlog = () => {
         <div className="space-y-2 text-sm">
           <h1 className="text-4xl font-[500]">What&#39;s on your mind?</h1>
           <p className="text-slate-300">
-            Start sharing your thoughts and stories with the world by crafting
-            your own unique blog on our platform.
+        Publish your passions, your way
+        Create a unique and beautiful blog easily.
           </p>
         </div>
         <form

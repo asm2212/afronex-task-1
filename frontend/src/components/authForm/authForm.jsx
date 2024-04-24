@@ -21,7 +21,6 @@ const AuthForm = () => {
   const isSubmitting = navigation.state === "submitting";
   const { toast } = useToast();
 
-  // checking if token is recieved and then change the authentication state to true
   useEffect(() => {
     if (data && "authToken" in data) {
       setIsAuth(true);
@@ -31,7 +30,7 @@ const AuthForm = () => {
       const date = new Date();
       toast({
         title: data.message,
-        description: date.toString(),
+        content: date.toString(),
       });
     }
   }, [data, setIsAuth, setUserName, toast]);
@@ -45,13 +44,13 @@ const AuthForm = () => {
       >
         <div>
           <h1 className="font-bold text-3xl text-neutral-800 dark:text-neutral-200">
-            {isLogin ? "Log in to Blog Tech" : "Sign Up in to Blog Tech"}
+            {isLogin ? "Log in to Afronex Blog" : "Sign Up in to Afronex Blog"}
           </h1>
-          <p className="text-sm max-w-sm mt-2 text-slate-200">
+          {/* <p className="text-sm max-w-sm mt-2 text-slate-200">
             {isLogin
               ? "Log in to manage your profile or blogs."
-              : "Sign Up to join our community."}
-          </p>
+              : "Sign Up to join"}
+          </p> */}
         </div>
         {!isLogin && (
           <>
@@ -98,8 +97,8 @@ const AuthForm = () => {
             className="text-blue-500 hover:underline underline-offset-4"
           >
             {isLogin
-              ? "Need an account? Sign Up"
-              : "Already have an account? Login"}
+              ? "Need an Account? Sign Up"
+              : "Already have An account? Login"}
           </Link>
         </div>
       </Form>

@@ -22,7 +22,7 @@ const Navbar = () => {
     localStorage.removeItem("username");
     toast({
       title: "Logout Successfully!",
-      description: "Log in to manage your profile or blogs.",
+      content: "Log in to manage your profile or blogs.",
     });
   }
 
@@ -36,7 +36,7 @@ const Navbar = () => {
         <div
           className={`absolute rounded-2xl sm:relative ${active} sm:top-0 sm:right-0 sm:shadow-none transition-all duration-300 w-36 sm:w-auto`}
         >
-          <ul className="w-28 py-5 pl-5 text-sm flex flex-col gap-4 sm:flex-row sm:w-[fit-content] sm:p-0 sm:items-center">
+          <ul className="w-28 py-5 pl-5 text-sm flex flex-col gap-24 sm:flex-row sm:w-[fit-content] sm:p-0 sm:items-center">
             <li className={linkStyle}>
               <Link href="/#home">Home</Link>
             </li>
@@ -44,7 +44,7 @@ const Navbar = () => {
               <a href="/#blogs">Blogs</a>
             </li>
             <li className={linkStyle}>
-              <Link to="/users">Creators</Link>
+              <Link to="/users">Individual</Link>
             </li>
             <li className={linkStyle}>
               <Link to="/blogs/create-blog">Create</Link>
