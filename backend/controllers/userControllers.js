@@ -82,7 +82,7 @@ export const deleteUser = async (req, res) => {
     const username = res.locals.user.username;
     const profileImg = res.locals.user.profileImg.public_id;
 
-    // Delete user document
+    
     await deleteOnCloudinary(profileImg);
     await userModel.findOneAndDelete({ _id: userId });
 

@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 export const createComment = async (req, res) => {
   const blogId = req.params["blogId"];
   const { _id, username } = res.locals.user;
-  const description = req.body.description;
+  const content = req.body.content;
 
   try {
     if (!mongoose.isValidObjectId(blogId)) {
@@ -23,7 +23,7 @@ export const createComment = async (req, res) => {
       blogId,
       userId: _id,
       username,
-      description,
+      content,
     });
     if (!newComment) {
       throw new Error("Error while adding comment.");

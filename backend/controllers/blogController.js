@@ -6,16 +6,16 @@ import {
 import commentModel from "../models/commentModel.js";
 import mongoose from "mongoose";
 
-export const getAllBlogs = async (req, res) => {
-  const category = req.query.category;
-  if (category === "" || category === "all" || !category) {
-    const blogData = await blogs.find({});
-    res.status(200).json(blogData);
-  } else {
-    const blogData = await blogs.find({ category: category });
-    res.status(200).json(blogData);
-  }
-};
+// export const getAllBlogs = async (req, res) => {
+//   const category = req.query.category;
+//   if (category === "" || category === "all" || !category) {
+//     const blogData = await blogs.find({});
+//     res.status(200).json(blogData);
+//   } else {
+//     const blogData = await blogs.find({ category: category });
+//     res.status(200).json(blogData);
+//   }
+// };
 
 export const getBlogById = async (req, res) => {
   try {
@@ -48,20 +48,18 @@ export const getBlogById = async (req, res) => {
 };
 
 export const createBlog = async (req, res) => {
-  const { title, description, category } = req.body;
+  const { title, content } = req.body;
   const user = res.locals.user;
 
   try {
-    // Upload image to Cloudinary
     const cloudinaryRes = await uploadOnCloudinary(req.file);
     if (!cloudinaryRes) {
       throw new Error("Failed to upload image to Cloudinary");
     }
-    // Create blog entry
+    
     const newBlog = new blogs({
       title,
-      description,
-      category,
+      content,
       img: {
         public_id: cloudinaryRes.public_id,
         url: cloudinaryRes.url,
@@ -81,7 +79,7 @@ export const updateBlog = async (req, res) => {
   const user = res.locals.user.username;
   const UpdatedData = {
     title: req.body.title,
-    description: req.body.description,
+    content: req.body.content,
   };
 
   try {
