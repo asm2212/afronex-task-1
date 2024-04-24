@@ -48,7 +48,7 @@ export const getBlogById = async (req, res) => {
 };
 
 export const createBlog = async (req, res) => {
-  const { title, content } = req.body;
+  const { title, content,category } = req.body;
   const user = res.locals.user;
 
   try {
@@ -60,6 +60,7 @@ export const createBlog = async (req, res) => {
     const newBlog = new blogs({
       title,
       content,
+      category,
       img: {
         public_id: cloudinaryRes.public_id,
         url: cloudinaryRes.url,
@@ -141,5 +142,26 @@ export const deleteBlog = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+export const searchBlog = async (req, res) => {
+  try {
+    const id = req.params["id"];
+    const blogData = await blogs.find({
+      $or: [
+        { title: { $regex: id, $options: "i" } },
+        { category: { $regex: id, $options: "i" } },
+        { author: { $regex: id, $options: "i" } },
+      ],
+    });
+
+    if (!blogData) {
+      return res.status(404).json({ message: "No blogs found" });
+    }
+
+    res.status(200).json(blogData);
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
   }
 };

@@ -24,7 +24,10 @@ const schema = mongoose.Schema({
         type: String,
         required: true
     },
-
+    category: {
+        type: String,
+        required: true
+    }
 }, { timestamps: true });
 
 const blogs = mongoose.model('blogs', schema);
