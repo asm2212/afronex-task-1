@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import router from "./routes/Routes.js";
 import bodyParser from "body-parser";
-import { checkUser } from "./middleware/auth.js";
+import { verifyUser } from "./middleware/auth.js";
 import mongoose from "mongoose";
 
 dotenv.config();
@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(router);
 app.use(express.static("./uploads"));
 
-app.get("/", checkUser, (req, res) => {
+app.get("/", verifyUser, (req, res) => {
   const username = res.locals.username;
   const response = {
     message: "Welcome to Afronex Blog!",
