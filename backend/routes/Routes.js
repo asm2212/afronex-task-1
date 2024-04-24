@@ -1,6 +1,6 @@
 import express from "express";
 import multer from "multer";
-import { authentication, checkUser } from "../middleware/auth.js";
+import { authentication, verifyUser } from "../middleware/auth.js";
 import {
   registerController,
   loginController,
@@ -33,14 +33,14 @@ router.post("/register", registerController);
 router.post("/login", loginController);
 
 
-router.get("/users/:id", checkUser, getUserDetails);
+router.get("/users/:id", verifyUser, getUserDetails);
 router.get("/get-users/:username", getAllUsers);
 router.put("/update-user/", authentication, upload.single("img"), updateUser);
 router.delete("/delete-user", authentication, deleteUser);
 
 
 router.get("/get-blogs", getAllBlogs);
-router.get("/get-blog/:blogId", checkUser, getBlogById);
+router.get("/get-blog/:blogId", verifyUser, getBlogById);
 router.post("/create-blog", authentication, upload.single("img"), createBlog);
 router.put(
   "/update-blog/:id",
@@ -52,9 +52,8 @@ router.delete("/delete-blog/:id", authentication, deleteBlog);
 
 
 router.post("/create-comment/:blogId", authentication, createComment);
-router.get("/get-comments/:blogId", checkUser, getAllComments);
+router.get("/get-comments/:blogId", verifyUser, getAllComments);
 router.delete("/delete-comment/:commentId", authentication, deleteComment);
 
-router.get("/search/:id", searchBlog);
 
 export default router;

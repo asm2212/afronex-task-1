@@ -43,15 +43,10 @@ const userSchema = mongoose.Schema(
         default: process.env.USER_IMAGE,
       },
     },
-    bio: {
-      type: String,
-      default: "Bio.",
-    },
   },
   { timestamps: true }
 );
 
-// fire a function before doc saved to db
 userSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, 10);
   next();

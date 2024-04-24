@@ -40,8 +40,8 @@ export const authentication = (req, res, next) => {
   }
 };
 
-// check current user
-export const checkUser = (req, res, next) => {
+
+export const verifyUser = (req, res, next) => {
   try {
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
