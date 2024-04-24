@@ -6,16 +6,16 @@ import {
 import commentModel from "../models/commentModel.js";
 import mongoose from "mongoose";
 
-// export const getAllBlogs = async (req, res) => {
-//   const category = req.query.category;
-//   if (category === "" || category === "all" || !category) {
-//     const blogData = await blogs.find({});
-//     res.status(200).json(blogData);
-//   } else {
-//     const blogData = await blogs.find({ category: category });
-//     res.status(200).json(blogData);
-//   }
-// };
+export const getAllBlogs = async (req, res) => {
+  const category = req.query.category;
+  if (category === "" || category === "all" || !category) {
+    const blogData = await blogs.find({});
+    res.status(200).json(blogData);
+  } else {
+    const blogData = await blogs.find({ category: category });
+    res.status(200).json(blogData);
+  }
+};
 
 export const getBlogById = async (req, res) => {
   try {
