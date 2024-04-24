@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import router from "./routes/router.js";
+import router from "./routes/Routes.js";
 import bodyParser from "body-parser";
 import { checkUser } from "./middleware/auth.js";
 import mongoose from "mongoose";
