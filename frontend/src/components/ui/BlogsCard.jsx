@@ -27,18 +27,18 @@ const BlogsCard = ({ data }) => {
           </span>
         )}
         <h1
-          className="text-2xl hover:underline cursor-pointer line-clamp-2"
+          className="text-2xl hover:underline cursor-pointer line-clamp-2  hover:text-blue-700"
           onClick={() => redirect(`/blogs/${data._id}`)}
         >
           {data.title}
         </h1>
         <Link
-          className="text-gray-600 hover:underline"
+          className="text-gray-600 hover:underline  hover:text-blue-700"
           to={`/users/${data.author}`}
         >
           @{data.author}
         </Link>
-        <span className="text-gray-600">
+        <span className="text-gray-600  hover:text-blue-700">
           {date && date.substring(0, 10)}
         </span>
       </div>
