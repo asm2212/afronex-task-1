@@ -66,7 +66,7 @@ const Blogs = () => {
         <title>{data ? data.title : "Blog Not Found"}</title>
         <meta
           name="content"
-          content={data ? data.content.substring(0, 200) : "Blog Not Found"}
+          content={data && data.content ? data.content.substring(0, 200) : "Blog Not Found"}
         />
       </Helmet>
       <motion.div
@@ -103,7 +103,9 @@ const Blogs = () => {
           </div>
           <div className="flex flex-col gap-10 my-10">
             <h1 className="text-4xl md:text-5xl font-arapey">{data.title}</h1>
-            <img src={data.img.url} alt="blog image" />
+            {data && data.img && (
+              <img src={data.img.url} alt="blog image" />
+            )}
             <div className="flex justify-between w-full">
               <Link
                 to={`/users/${data.author}`}
@@ -114,7 +116,7 @@ const Blogs = () => {
               <span>Created on: {data.createdAt.substring(0, 10)}</span>
             </div>
             <article className="prose-neutral prose-lg lg:prose-xl text-gray-300">
-              {parse(data.content)}
+              {parse(data && data.content)}
             </article>
             <div className="space-y-4">
               <form
