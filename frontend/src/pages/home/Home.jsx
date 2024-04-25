@@ -109,7 +109,7 @@ const Home = () => {
         className="space-y-10 w-[80%] md:w-[50rem] xl:w-[80rem]"
         id="blogs"
       >
-        <h1 className="text-3xl sm:text-4xl">Categories</h1>
+        <h1 className="text-3xl sm:text-4xl">Category</h1>
         <ul className="flex gap-4 flex-wrap leading-loose">
           {categories.map((items, index) => {
             return (
