@@ -89,7 +89,7 @@ const AuthForm = () => {
         <div className="w-full">
           <Link
             to={`?mode=${isLogin ? "register" : "login"}`}
-            className="text-blue-500 hover:underline underline-offset-4"
+            className="text-blue-700 hover:underline underline-offset-4"
           >
             {isLogin
               ? "Need an Account? Sign Up"

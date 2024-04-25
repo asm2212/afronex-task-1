@@ -79,7 +79,7 @@ const Blogs = () => {
         <div className="w-[85%] md:w-[70%] xl:w-[55%]">
           <div className="flex justify-between">
             <span
-              className="flex gap-2 items-center underline underline-offset-4 cursor-pointer w-[fit-content]"
+              className="flex gap-2 items-center underline underline-offset-4 cursor-pointer w-[fit-content] hover:text-blue-700" 
               onClick={() => history(-1)}
             >
               <IoArrowBack />
@@ -95,25 +95,27 @@ const Blogs = () => {
                   <MdDelete className="text-xl text-red-500" />
                 </AlertButton>
                 <FaEdit
-                  className="text-green-600"
+                  className="text-green-600 hover:text-blue-700"
                   onClick={() => history(`/blogs/${params.blogId}/edit`)}
                 />
               </div>
             )}
           </div>
           <div className="flex flex-col gap-10 my-10">
-            <h1 className="text-4xl md:text-5xl font-arapey">{data.title}</h1>
+            <h1 className="text-4xl md:text-5xl font-arapey hover:text-blue-700">{data.title}</h1>
             {data && data.img && (
               <img src={data.img.url} alt="blog image" />
             )}
             <div className="flex justify-between w-full">
               <Link
                 to={`/users/${data.author}`}
-                className="cursor-pointer hover:underline"
+                className="cursor-pointer hover:underline text-blue-700"
               >
                 By {data.author}
               </Link>
-              <span>Created on: {data.createdAt.substring(0, 10)}</span>
+              <span className="hover:text-blue-700"> 
+                Created on: {data.createdAt.substring(0, 10)}
+              </span>
             </div>
             <article className="prose-neutral prose-lg lg:prose-xl text-gray-300">
               {parse(data && data.content)}
@@ -144,12 +146,12 @@ const Blogs = () => {
                     <div className="flex justify-between">
                       <Link
                         to={`/users/${item.username}`}
-                        className="hover:underline"
+                        className="hover:underline text-blue-700"
                       >
                         {item.username}
                       </Link>
                       <div className="flex items-center gap-1 ">
-                        <span>{item.createdAt.substring(0, 10)}</span>
+                        <span className="hover:text-blue-700">{item.createdAt.substring(0, 10)}</span> 
                         {item.isUser && (
                           <button
                             disabled={loading}

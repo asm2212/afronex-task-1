@@ -44,7 +44,7 @@ const Users = () => {
       ) : (
         <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-8">
           {isError ? (
-            <h1 className="col-span-3">User not found.</h1>
+            <h1 className="col-span-3 ">User not found.</h1>
           ) : (
             data &&
             data.map((items) => {

@@ -29,8 +29,10 @@ const UserDetails = () => {
             />
             <div className="flex flex-col gap-2 sm:flex-row sm:gap-10">
               <div className="space-y-1 sm:space-y-1">
-                <h1 className="text-xl font-[500]">{data.username}</h1>
-                <h2 className="flex items-center gap-2 text-sm text-slate-400">
+                <h1 className="text-xl font-[500] hover:text-blue-700">
+                  {data.username}
+                </h1>
+                <h2 className="flex items-center gap-2 text-sm text-slate-400 hover:text-blue-700">
                   <FaRegCalendarAlt />
                   Date joined: {data.createdAt.substring(0, 10)}
                 </h2>
@@ -58,7 +60,9 @@ const UserDetails = () => {
               data.auth ? "between" : "center"
             } w-4/5 md:w-full`}
           >
-            <h1 className="text-3xl font-[500]">Blogs</h1>
+            <h1 className="text-3xl font-[500] hover:text-blue-700"> 
+              Blogs
+            </h1>
             {data.auth && (
               <Button variant="outline">
                 <Link to="/blogs/create-blog">New Blog</Link>
