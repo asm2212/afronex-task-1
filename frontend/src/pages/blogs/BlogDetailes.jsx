@@ -34,7 +34,7 @@ const Blogs = () => {
     const date = new Date();
     toast({
       title: isError ? error : response.message,
-      description: !isError && date.toString(),
+      content: !isError && date.toString(),
     });
     history(-1);
   };
@@ -45,7 +45,7 @@ const Blogs = () => {
       `/create-comment/${params.blogId}`,
       "POST",
       {
-        description: comment,
+        content: comment,
       }
     );
     !response && alert("Login to add a comment.");
@@ -65,8 +65,8 @@ const Blogs = () => {
       <Helmet>
         <title>{data ? data.title : "Blog Not Found"}</title>
         <meta
-          name="description"
-          content={data ? data.description.substring(0, 200) : "Blog Not Found"}
+          name="content"
+          content={data ? data.content.substring(0, 200) : "Blog Not Found"}
         />
       </Helmet>
       <motion.div
@@ -114,7 +114,7 @@ const Blogs = () => {
               <span>Created on: {data.createdAt.substring(0, 10)}</span>
             </div>
             <article className="prose-neutral prose-lg lg:prose-xl text-gray-300">
-              {parse(data.description)}
+              {parse(data.content)}
             </article>
             <div className="space-y-4">
               <form
