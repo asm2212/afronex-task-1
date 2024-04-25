@@ -35,18 +35,33 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="flex flex-col items-center justify-center"
+    >
       <div className="absolute inset-0 -z-10 h-full w-full bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem] opacity-[0.05]" />
       <div className="absolute size-96 bg-neutral-700 top-0 rounded-full blur-[150px] -z-50" />
       <div className="my-44 sm:my-52 flex flex-col gap-14 items-center justify-center text-center">
-        <h1 className="text-5xl md:w-[75%] md:text-6xl xl:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50 leading-tight px-4 md:px-0">
-        Publish your passions, your way
-        </h1>
-        <p className="w-11/12 md:w-[55%] sm:text-xl text-slate-400">
-        Create a unique and beautiful blog easily{" "}
+        <motion.h1
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          className="text-5xl md:w-[75%] md:text-6xl xl:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50 leading-tight px-4 md:px-0"
+        >
+          Publish your passions, your way
+        </motion.h1>
+        <motion.p
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="w-11/12 md:w-[55%] sm:text-xl text-slate-400"
+        >
+          Create a unique and beautiful blog easily{" "}
           <span className="text-slate-100"> </span>{" "}
-
-        </p>
+        </motion.p>
         <div className="w-4/5 md:w-[40%] relative">
           <Input
             type="text"
@@ -60,10 +75,10 @@ const Home = () => {
           <BiSearchAlt className="absolute h-11 top-1 right-5 text-xl" />
           {searchRes && searchRes.length > 0 && isFocused && (
             <motion.div
-              className="absolute backdrop-blur-xl bg-slate-950 mt-5 p-5 rounded-xl max-h-80 overflow-y-scroll"
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ type: "spring", stiffness: 200, damping: 10 }}
+              className="absolute backdrop-blur-xl bg-slate-950 mt-5 p-5 rounded-xl max-h-80 overflow-y-scroll"
             >
               <ul className="w-[30rem] flex flex-col gap-2 items-start">
                 {searchRes.map((blogs) => {
@@ -87,7 +102,13 @@ const Home = () => {
           )}
         </div>
       </div>
-      <div className="space-y-10 w-[80%] md:w-[50rem] xl:w-[80rem]" id="blogs">
+      <motion.div
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.6 }}
+        className="space-y-10 w-[80%] md:w-[50rem] xl:w-[80rem]"
+        id="blogs"
+      >
         <h1 className="text-3xl sm:text-4xl">Categories</h1>
         <ul className="flex gap-4 flex-wrap leading-loose">
           {categories.map((items, index) => {
@@ -107,8 +128,13 @@ const Home = () => {
             );
           })}
         </ul>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 justify-items-center mt-20">
+      </motion.div>
+      <motion.div
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.8 }}
+        className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 justify-items-center mt-20"
+      >
         {loading ? (
           Array.from({ length: 9 }).map((items, index) => {
             return (
@@ -132,16 +158,25 @@ const Home = () => {
           })
         ) : data && data.length > 0 ? (
           data.map((items) => {
-            return <BlogsCard key={items._id} data={items} />;
+            return (
+              <motion.div
+                key={items._id}
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.8 }}
+              >
+                <BlogsCard data={items} />
+              </motion.div>
+            );
           })
         ) : (
           <div className="col-span-3 flex justify-center items-center">
             <h1>Cannot find any blog.</h1>
           </div>
         )}
-      </div>
+      </motion.div>
       <Footer />
-    </div>
+    </motion.div>
   );
 };
 

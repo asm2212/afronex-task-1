@@ -44,7 +44,7 @@ const AuthForm = () => {
       >
         <div>
           <h1 className="font-bold text-3xl text-neutral-800 dark:text-neutral-200">
-            {isLogin ? "Log in to Afronex Blog" : "Sign Up in to Afronex Blog"}
+            {isLogin ? "Sign In" : "Sign Up "}
           </h1>
         </div>
         {!isLogin && (
