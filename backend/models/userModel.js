@@ -1,37 +1,37 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-import pkg from "validator";
+import { isEmail } from "validator";
 import dotenv from "dotenv";
-const { isEmail } = pkg;
+
 dotenv.config();
 
 const userSchema = mongoose.Schema(
   {
     username: {
       type: String,
-      required: [true, "username is required"],
+      required: [true, "Username is required"],
       unique: true,
       lowercase: true,
     },
     firstname: {
       type: String,
-      required: [true, "first name is required"],
+      required: [true, "First name is required"],
     },
     lastname: {
       type: String,
-      required: [true, "last name is required"],
+      required: [true, "Last name is required"],
     },
     email: {
       type: String,
-      required: [true, "email is required"],
+      required: [true, "Email is required"],
       unique: true,
       lowercase: true,
       validate: [isEmail, "Please enter a valid email"],
     },
     password: {
       type: String,
-      required: [true, "password is required"],
-      minlength: [6, "incorrect password"],
+      required: [true, "Password is required"],
+      minlength: [6, "Password should be at least 6 characters long"],
     },
     profileImg: {
       public_id: {
@@ -40,7 +40,7 @@ const userSchema = mongoose.Schema(
       },
       url: {
         type: String,
-        default: process.env.USER_IMAGE,
+        default: process.env.USER_IMAGE || "default_image_url",
       },
     },
   },
@@ -52,5 +52,6 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-const userModel = mongoose.model("user", userSchema);
+const userModel = mongoose.model("User", userSchema);
+
 export default userModel;
