@@ -4,23 +4,21 @@ import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 dotenv.config();
 
-
 const handleErrors = (err) => {
   console.log(err.code, err.message);
   if (err.message.includes("incorrect password")) {
-    return { message: "Minimum password length is 6 characters" };
+    return { message: "Minimum password length is 4 characters" };
   }
   if (err.code === 11000) {
-    return { message: "email or username is already registered" };
+    return { message: "Email or username is already registered" };
   }
   if (err.message.includes("is required")) {
     return { message: "Please fill up all fields." };
   }
   if (err.message.includes("user validation failed")) {
-    return { message: "email is invalid" };
+    return { message: "Email is invalid" };
   }
 };
-
 
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id, username) => {
@@ -39,10 +37,10 @@ export const registerController = async (req, res) => {
       lastname,
       email,
       password,
-      bio: `Hey I'm ${firstname}`,
+      bio: `Hey, I'm ${firstname}`,
     });
     res.status(201).json({
-      message: "User is created successfully",
+      message: "User has been created successfully",
     });
   } catch (err) {
     const errors = handleErrors(err);
@@ -51,22 +49,22 @@ export const registerController = async (req, res) => {
 };
 
 export const loginController = async (req, res) => {
-  const user = await userModel.findOne({ email: req.body.email });
-  if (!user) {
-    return res.status(404).json({ message: "email does not exists" });
-  }
+  const { email, password } = req.body;
   try {
-    const isValid = await bcrypt.compare(req.body.password, user.password);
+    const user = await userModel.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "Email does not exist" });
+    }
+    const isValid = await bcrypt.compare(password, user.password);
     if (isValid) {
       const token = createToken(user._id, user.username);
-      return res.status(201).json({
-        user: user._id,
-        username: user.username,
+      return res.status(200).json({
+        user: { _id: user._id, username: user.username },
         authToken: token,
-        message: "Login Successfully!",
+        message: "Login successful!",
       });
     } else {
-      res.status(401).json({ message: "invalid credentails" });
+      res.status(401).json({ message: "Invalid credentials" });
     }
   } catch (err) {
     if (err.name === "ValidationError") {
