@@ -16,7 +16,7 @@ const UsersCard = ({ data }) => {
             className="hover:underline underline-offset-4"
             to={`/users/${data.username}`}
           >
-            @{data.username}
+            {data.username}
           </Link>
           <p className="line-clamp-2 text-slate-200 text-sm">{data.bio}</p>
           <span className="flex items-center gap-1 text-slate-400 text-sm">

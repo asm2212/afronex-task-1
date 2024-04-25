@@ -163,7 +163,7 @@ const Blogs = () => {
                         )}
                       </div>
                     </div>
-                    <p className="text-slate-100">{item.description}</p>
+                    <p className="text-slate-100">{item.content}</p>
                   </div>
                 ))
               ) : (
