@@ -88,7 +88,7 @@ const AuthForm = () => {
         {data && <p className="text-red-600">{data.error}</p>}
         <div className="w-full">
           <Link
-            to={`?mode=${isLogin ? "signup" : "login"}`}
+            to={`?mode=${isLogin ? "register" : "login"}`}
             className="text-blue-500 hover:underline underline-offset-4"
           >
             {isLogin

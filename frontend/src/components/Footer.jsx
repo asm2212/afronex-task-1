@@ -9,9 +9,9 @@ const Footer = () => {
           <h1 className="text-2xl font-bold text-slate-100">Afronex Blog</h1>
           <div className="flex flex-col gap-4 sm:flex-row">
             <Link to="/">Home</Link>
-            <Link to="/auth?mode=signup">Sign Up</Link>
+            <Link to="/auth?mode=register">Sign Up</Link>
             <Link to="/auth?mode=login">Login</Link>
-            {/* <Link to="/users">Creators</Link> */}
+            <Link to="/users">Individual</Link>
             <Link to="/blogs/create-blog">Create</Link>
           </div>
         </div>

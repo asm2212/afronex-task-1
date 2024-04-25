@@ -44,7 +44,7 @@ const EditUser = () => {
     res &&
       toast({
         title: res.message,
-        description: date.toString(),
+        content: date.toString(),
       });
     formData.delete("firstname");
     formData.delete("lastname");
@@ -62,7 +62,7 @@ const EditUser = () => {
     res &&
       toast({
         title: res.message,
-        description: date.toString(),
+        content: date.toString(),
       });
     return history("/", { replace: true });
   };

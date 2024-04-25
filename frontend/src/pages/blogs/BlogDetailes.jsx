@@ -167,7 +167,7 @@ const Blogs = () => {
                   </div>
                 ))
               ) : (
-                <h1>There are currently no comments on this blog post.</h1>
+                <h1>There are currently no comments on this blog.</h1>
               )}
             </div>
           </div>

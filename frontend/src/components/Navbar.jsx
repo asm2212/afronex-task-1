@@ -56,7 +56,7 @@ const Navbar = () => {
             </li>
             <li>
               <Link
-                to={!isAuth ? "/auth/?mode=signup" : "/auth/?mode=signup"}
+                to={!isAuth ? "/auth/?mode=register" : "/auth/?mode=register"}
                 onClick={isAuth && logoutHandler}
               >
                 <GradientButton>

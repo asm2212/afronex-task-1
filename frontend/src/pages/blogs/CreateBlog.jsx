@@ -122,7 +122,7 @@ const CreateBlog = () => {
             {loading && "Processing...Please Wait."}
           </h1>
           {!loading && error && (
-            <h1 className="text-red-500 text-center">
+            <h1 className="text-red-600 text-center">
               Error while creating blog.
             </h1>
           )}

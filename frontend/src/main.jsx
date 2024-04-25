@@ -17,7 +17,7 @@ const UserDetails = React.lazy(() => import("./pages/users/UserDetails.jsx"));
 const CreateBlog = React.lazy(() => import("./pages/blogs/CreateBlog.jsx"));
 const EditUser = React.lazy(() => import("./pages/users/EditUser.jsx"));
 const BlogDetails = React.lazy(() => import("./pages/blogs/BlogDetailes.jsx"));
-const UpdateBlog = React.lazy(() => import("./pages/blogs/UpdateBlog.jsx"));
+const UpdateBlog = React.lazy(() => import("./pages/blogs/EditBlog.jsx"));
 const Error = React.lazy(() => import("./pages/Error.jsx"));
 
 const queryClient = new QueryClient();
