@@ -8,8 +8,8 @@ const Auth = () => {
   const redirect = useNavigate();
   const { isAuth, username } = useContext(AuthContext);
   useEffect(() => {
-    if (searchParams.get("mode") !== ("login" || "signup")) {
-      redirect("/auth?mode=signup");
+    if (searchParams.get("mode") !== ("login" || "register")) {
+      redirect("/auth?mode=register");
     }
     if (isAuth) {
       redirect(`/users/${username}`);
