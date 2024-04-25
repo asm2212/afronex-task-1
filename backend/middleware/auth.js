@@ -3,7 +3,7 @@ import userModel from "../models/userModel.js";
 import dotenv from "dotenv";
 dotenv.config();
 
-export const authentication = (req, res, next) => {
+export const authentication = async (req, res, next) => {
   try {
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
@@ -12,52 +12,38 @@ export const authentication = (req, res, next) => {
       throw new Error("No token provided.");
     }
 
-    jwt.verify(
-      token,
-      process.env.ACCESS_SECRET_KEY,
-      async (err, decodedToken) => {
-        if (err) {
-          res.locals.user = null;
-          return res.status(401).json({
-            message: "Token is invalid or expired.",
-          });
-        }
+    const decodedToken = jwt.verify(token, process.env.ACCESS_SECRET_KEY);
+    const user = await userModel.findById(decodedToken.id);
 
-        const user = await userModel.findById(decodedToken.id);
-        if (!user) {
-          throw new Error("User not found.");
-        }
+    if (!user) {
+      throw new Error("User not found.");
+    }
 
-        res.locals.user = user;
-        next();
-      }
-    );
+    res.locals.user = user;
+    next();
   } catch (error) {
     res.locals.user = null;
     return res.status(401).json({
-      message: "User is not authenticated.",
+      message: error.message || "User is not authenticated.",
     });
   }
 };
 
-
-export const verifyUser = (req, res, next) => {
+export const verifyUser = async (req, res, next) => {
   try {
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
-    jwt.verify(
-      token,
-      process.env.ACCESS_SECRET_KEY,
-      async (err, decodedToken) => {
-        if (err) {
-          res.locals.username = null;
-        } else {
-          res.locals.username = decodedToken.username;
-        }
-        next();
-      }
-    );
+
+    if (!token) {
+      res.locals.username = null;
+      return next();
+    }
+
+    const decodedToken = jwt.verify(token, process.env.ACCESS_SECRET_KEY);
+    res.locals.username = decodedToken.username;
+    next();
   } catch (error) {
+    res.locals.username = null;
     return res.status(500).json({
       message: "Internal server error.",
     });
