@@ -12,16 +12,20 @@ const BlogsCard = ({ data }) => {
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring" }}
     >
-      <img
-        src={data.img.url}
-        alt="thubmnail"
-        className="aspect-video rounded-md cursor-pointer"
-        onClick={() => redirect(`/blogs/${data._id}`)}
-      />
+      {data.img && (
+        <img
+          src={data.img.url}
+          alt="thumbnail"
+          className="aspect-video rounded-md cursor-pointer"
+          onClick={() => redirect(`/blogs/${data._id}`)}
+        />
+      )}
       <div className="flex flex-col gap-2 py-6 px-5">
-        <span className="py-1 px-4 bg-zinc-800 w-[fit-content] rounded-full text-white text-sm">
-          {data.category.toUpperCase()}
-        </span>
+        {data.category && (
+          <span className="py-1 px-4 bg-zinc-800 w-[fit-content] rounded-full text-white text-sm">
+            {data.category.toUpperCase()}
+          </span>
+        )}
         <h1
           className="text-2xl hover:underline cursor-pointer line-clamp-2"
           onClick={() => redirect(`/blogs/${data._id}`)}
@@ -34,7 +38,9 @@ const BlogsCard = ({ data }) => {
         >
           @{data.author}
         </Link>
-        <span className="text-gray-600">{date && date.substring(0, 10)}</span>
+        <span className="text-gray-600">
+          {date && date.substring(0, 10)}
+        </span>
       </div>
     </motion.div>
   );
