@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-import { isEmail } from "validator";
+import validator from "validator";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -26,7 +26,7 @@ const userSchema = mongoose.Schema(
       required: [true, "Email is required"],
       unique: true,
       lowercase: true,
-      validate: [isEmail, "Please enter a valid email"],
+      validate: [validator.isEmail, "Please enter a valid email"],
     },
     password: {
       type: String,

@@ -34,30 +34,22 @@ router.post("/register", registerController);
 router.post("/login", loginController);
 
 
-router.get("/users/:id", verifyUser, getUserDetails);
-router.get("/get-users/:username", getAllUsers);
+router.get("/users/:id", verifyUser, getUserDetails); 
+router.get("/get-users/:username", getAllUsers); 
 router.put("/update-user/", authentication, upload.single("img"), updateUser);
-router.delete("/delete-user", authentication, deleteUser);
+router.delete("/delete-user", authentication, deleteUser); 
 
 
 router.get("/get-blogs", getAllBlogs);
 router.get("/get-blog/:blogId", verifyUser, getBlogById);
-router.post("/create-blog", authentication, upload.single("img"), createBlog);
-router.put(
-  "/update-blog/:id",
-  authentication,
-  upload.single("img"),
-  updateBlog
-);
+router.post("/create-blog", authentication, upload.single("img"), createBlog); 
+router.put("/update-blog/:id", authentication, upload.single("img"), updateBlog); 
 router.delete("/delete-blog/:id", authentication, deleteBlog);
-
-
-router.post("/create-comment/:blogId", authentication, createComment);
-router.get("/get-comments/:blogId", verifyUser, getAllComments);
-router.delete("/delete-comment/:commentId", authentication, deleteComment);
-
-
 router.get("/search/:id", searchBlog);
 
+
+router.post("/create-comment/:blogId", authentication, createComment); 
+router.get("/get-comments/:blogId", verifyUser, getAllComments);
+router.delete("/delete-comment/:commentId", authentication, deleteComment);
 
 export default router;
