@@ -29,7 +29,7 @@ const CreateBlog = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     formData.append("title", title);
-    formData.append("description", desc);
+    formData.append("content", desc);
     formData.append("category", category || "all");
     if (img) {
       formData.append("img", img);
@@ -41,13 +41,13 @@ const CreateBlog = () => {
     const date = new Date();
     toast({
       title: "Blog Created Sucessfully!",
-      description: date.toString(),
+      content: date.toString(),
     });
     setImg(null);
     formData.delete("img");
     formData.delete("title");
     formData.delete("category");
-    formData.delete("description");
+    formData.delete("content");
     return redirect(`/blogs/${response._id}`);
   };
 

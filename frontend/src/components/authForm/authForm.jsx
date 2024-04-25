@@ -46,11 +46,6 @@ const AuthForm = () => {
           <h1 className="font-bold text-3xl text-neutral-800 dark:text-neutral-200">
             {isLogin ? "Log in to Afronex Blog" : "Sign Up in to Afronex Blog"}
           </h1>
-          {/* <p className="text-sm max-w-sm mt-2 text-slate-200">
-            {isLogin
-              ? "Log in to manage your profile or blogs."
-              : "Sign Up to join"}
-          </p> */}
         </div>
         {!isLogin && (
           <>

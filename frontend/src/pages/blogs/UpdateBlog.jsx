@@ -20,20 +20,20 @@ const UpdateBlog = () => {
 
   useEffect(() => {
     setData(fd);
-    setDesc(fd.description);
+    setDesc(fd.content);
   }, [fd]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("title", data.title);
-    formData.append("description", desc);
+    formData.append("content", desc);
     if (img) {
       formData.append("img", img);
     }
     await fetchData(`/update-blog/${params.blogId}`, "PUT", formData);
     formData.delete("title");
-    formData.delete("description");
+    formData.delete("content");
     formData.delete("img");
     history(-1);
   };
