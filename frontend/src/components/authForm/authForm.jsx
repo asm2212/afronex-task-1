@@ -82,7 +82,7 @@ const AuthForm = () => {
           disabled={isSubmitting}
           className="w-full h-12 text-md gap-2"
         >
-          {isSubmitting ? "Submitting..." : isLogin ? "Login" : "Sign Up"}
+          {isSubmitting ? "Submitting..." : isLogin ? "Login" : "Register"}
           <MdOutlineLogin />
         </Button>
         {data && <p className="text-red-600">{data.error}</p>}
@@ -93,7 +93,7 @@ const AuthForm = () => {
           >
             {isLogin
               ? "Need an Account? Sign Up"
-              : "Already have An account? Login"}
+              : "Already have An account? Sign In"}
           </Link>
         </div>
       </Form>
