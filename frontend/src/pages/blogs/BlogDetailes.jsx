@@ -146,7 +146,7 @@ const Blogs = () => {
                         to={`/users/${item.username}`}
                         className="hover:underline"
                       >
-                        @{item.username}
+                        {item.username}
                       </Link>
                       <div className="flex items-center gap-1 ">
                         <span>{item.createdAt.substring(0, 10)}</span>

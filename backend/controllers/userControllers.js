@@ -8,20 +8,20 @@ import {
 
 export const getUserDetails = async (req, res) => {
   try {
-    const user = req.params["id"];
+    const { id } = req.params;
     const username = res.locals.username;
-    const userDetails = await userModel.findOne({ username: user }).lean();
+    const userDetails = await userModel.findOne({ username: id }).lean();
 
     if (!userDetails) {
-      return res.status(404).json({
-        message: "User not found.",
-      });
+      return res.status(404).json({ message: "User not found." });
     }
-    const userBlogs = await blogs.find({ author: user });
+
+    const userBlogs = await blogs.find({ author: id });
+
     return res.status(200).json({
       ...userDetails,
       blogs: userBlogs,
-      auth: user === username ? true : false,
+      auth: id === username,
     });
   } catch (error) {
     console.error("Error:", error);
@@ -30,38 +30,42 @@ export const getUserDetails = async (req, res) => {
 };
 
 export const getAllUsers = async (req, res) => {
-  const ref = req.params["username"].toLowerCase();
-  if (ref === "all" || !ref) {
-    const users = await userModel.find({});
-    res.status(200).json(users);
-  } else {
-    try {
-      const user = await userModel.find({
+  const { username } = req.params;
+
+  try {
+    let users;
+    if (username === "all" || !username) {
+      users = await userModel.find({});
+    } else {
+      users = await userModel.find({
         $or: [
-          { firstname: { $regex: ref, $options: "i" } },
-          { lastname: { $regex: ref, $options: "i" } },
-          { username: { $regex: ref, $options: "i" } },
+          { firstname: { $regex: username, $options: "i" } },
+          { lastname: { $regex: username, $options: "i" } },
+          { username: { $regex: username, $options: "i" } },
         ],
       });
-      if (user.length >= 0) {
-        res.status(200).json(user);
-      } else {
-        res.status(404).error({ message: "User not found." });
-      }
-    } catch (error) {
-      res.status(500).json({ message: "Internal error." });
     }
+
+    if (users.length === 0) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    return res.status(200).json(users);
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    return res.status(500).json({ message: "Internal error." });
   }
 };
 
 export const updateUser = async (req, res) => {
   try {
-    const userId = res.locals.user._id;
+    const { _id: userId } = res.locals.user;
     const data = {
       firstname: req.body.firstname,
       lastname: req.body.lastname,
       bio: req.body.bio,
     };
+
     if (req.file) {
       const newImg = await uploadOnCloudinary(req.file);
       data.profileImg = {
@@ -69,49 +73,44 @@ export const updateUser = async (req, res) => {
         url: newImg.url,
       };
     }
-    await userModel.findOneAndUpdate(userId, data);
+
+    await userModel.findByIdAndUpdate(userId, data);
+
     return res.status(200).json({ message: "Profile Updated!" });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    console.error("Error updating user profile:", error);
+    return res.status(500).json({ message: "Internal server error." });
   }
 };
 
 export const deleteUser = async (req, res) => {
   try {
-    const userId = res.locals.user._id;
-    const username = res.locals.user.username;
-    const profileImg = res.locals.user.profileImg.public_id;
+    const { _id: userId, username, profileImg } = res.locals.user;
 
-    
-    await deleteOnCloudinary(profileImg);
-    await userModel.findOneAndDelete({ _id: userId });
+    await deleteOnCloudinary(profileImg.public_id);
+    await userModel.findByIdAndDelete(userId);
 
     const allBlogs = await blogs.find({ author: username });
+
     if (allBlogs.length > 0) {
       const imageUrls = allBlogs.map((blog) => blog.img.public_id);
       await deleteBlogImages(imageUrls);
-      const blogsId = allBlogs.map((item) => item._id);
-      await commentModel.deleteMany({ blogId: { $in: blogsId } });
+      await commentModel.deleteMany({ blogId: { $in: allBlogs.map((blog) => blog._id) } });
       await blogs.deleteMany({ author: username });
     }
 
-    res.status(200).json({
-      message: "Account closed.",
-    });
+    return res.status(200).json({ message: "Account closed." });
   } catch (error) {
     console.error("Error deleting user:", error);
-    res.status(500).json({
-      message: "Internal error.",
-    });
+    return res.status(500).json({ message: "Internal server error." });
   }
 };
+
 async function deleteBlogImages(imageUrls) {
   try {
     if (imageUrls.length === 0) return;
 
-    const deletionPromises = imageUrls.map((url) => deleteOnCloudinary(url));
-
-    await Promise.allSettled(deletionPromises);
+    await Promise.allSettled(imageUrls.map((url) => deleteOnCloudinary(url)));
   } catch (error) {
     console.error("Error deleting blog images:", error);
     throw error;
