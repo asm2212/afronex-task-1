@@ -1,6 +1,6 @@
 
 
-#####  Dynamic Blog Website
+###  Dynamic Blog Website
 Welcome to the Dynamic Blog Website project! This is a full-stack web application built using react with vite,node,monogodb,express,tailwind css etc. It provides users with a platform to create, read, update, and delete blog posts. The project aims to deliver a seamless and personalized blogging experience with robust user authentication and authorization systems.
 
 ### Features
