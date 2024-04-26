@@ -38,18 +38,31 @@ ShadCn: Additional styling framework for enhancing the design.
 To run this project locally, follow these steps:
 
 Clone Repository: Clone this repository to your local machine.
+
+
 Install Dependencies: Navigate to the project directory and install dependencies using npm install.
+
 Set up MongoDB: Set up your MongoDB database and obtain the connection string.
+
+
 Configure Environment Variables:
 Frontend: VITE_BASE_URL (Backend server link)
+
 Backend:
 PORT: Port number for the server
+
 ACCESS_SECRET_KEY: User-defined access secret key
+
 CLOUD_NAME, CLOUD_API, CLOUD_API_SECRET: Cloudinary configuration
+
 USER_IMAGE: User image directory (Frontend link + /user.jpeg)
+
 URI: MongoDB URI address
+
 Run Backend Server: Execute npm run dev in the /server directory.
+
 Run Frontend Development Server: Execute npm run dev in the /frontend directory.
+
 Access Application: Open your browser and go to http://localhost:5173.
 
 
