@@ -19,19 +19,19 @@ Comment Submission: Each blog post page includes a comment submission form for u
 ## 4. Responsive Design
 Seamless Experience: The website is designed to provide a seamless experience across devices of all sizes.
 ### Tech Stack
-Frontend
+## Frontend
 React.js with vite
 
-Backend
+## Backend
 Node.js: A JavaScript runtime for building server-side applications.
 Express.js: A web application framework for Node.js.
-Database
+## Database
 MongoDB: A NoSQL database for storing application data.
-Media Storage
+## Media Storage
 Cloudinary: A cloud-based media management solution for storing images.
-Authentication
+## Authentication
 JSON Web Tokens (JWT): Used for secure authentication and authorization.
-Styling
+## Styling
 Tailwind CSS: A utility-first CSS framework for styling user interfaces.
 ShadCn: Additional styling framework for enhancing the design.
 ### Getting Started
